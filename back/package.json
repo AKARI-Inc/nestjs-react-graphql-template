@@ -8,48 +8,77 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
-    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "fmt": "prettier --check \"src/**/*.ts\" \"test/**/*.ts\"",
+    "fmt:fix": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
-    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\"",
+    "lint:fix": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "pre-commit": "lint-staged",
+    "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js --config ./src/type_orm_config.ts",
+    "migration:show": "npm run typeorm migration:show",
+    "migration:create": "npm run typeorm migration:create -- -n",
+    "migration:generate": "npm run typeorm migration:generate -- -n",
+    "migration:run": "npm run typeorm migration:run --",
+    "migration:revert": "npm run typeorm migration:revert",
+    "migration:rundev": "npm run seed:drop && npm run migration:run && npm run seed",
+    "seed": "ts-node -r tsconfig-paths/register src/seed.ts",
+    "seed:drop": "ts-node -r tsconfig-paths/register src/seed.ts drop",
+    "login": "ts-node -r tsconfig-paths/register src/dev_login.ts"
   },
   "dependencies": {
-    "@nestjs/common": "^8.0.0",
-    "@nestjs/core": "^8.0.0",
-    "@nestjs/platform-express": "^8.0.0",
+    "@nestjs/apollo": "^10.0.9",
+    "@nestjs/common": "^8.4.4",
+    "@nestjs/config": "^2.0.0",
+    "@nestjs/core": "^8.4.4",
+    "@nestjs/graphql": "^10.0.10",
+    "@nestjs/platform-express": "^8.4.4",
+    "@nestjs/typeorm": "^8.0.3",
+    "apollo-server-express": "^3.6.7",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.13.2",
+    "graphql": "^16.4.0",
+    "graphql-tools": "^8.2.8",
+    "graphql-upload": "^13.0.0",
+    "pluralize": "^8.0.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
-    "rxjs": "^7.2.0"
+    "rxjs": "^7.5.5",
+    "typeorm": "^0.2.45"
   },
   "devDependencies": {
-    "@nestjs/cli": "^8.0.0",
-    "@nestjs/schematics": "^8.0.0",
-    "@nestjs/testing": "^8.0.0",
+    "@nestjs/cli": "^8.2.5",
+    "@nestjs/schematics": "^8.0.10",
+    "@nestjs/testing": "^8.4.4",
     "@types/express": "^4.17.13",
-    "@types/jest": "27.4.1",
-    "@types/node": "^16.0.0",
-    "@types/supertest": "^2.0.11",
-    "@typescript-eslint/eslint-plugin": "^5.0.0",
-    "@typescript-eslint/parser": "^5.0.0",
-    "eslint": "^8.0.1",
-    "eslint-config-prettier": "^8.3.0",
+    "@types/graphql-upload": "^8.0.11",
+    "@types/jest": "^27.4.1",
+    "@types/js-yaml": "^4.0.5",
+    "@types/node": "^17.0.29",
+    "@types/pluralize": "^0.0.29",
+    "@types/supertest": "^2.0.12",
+    "@typescript-eslint/eslint-plugin": "^5.21.0",
+    "@typescript-eslint/parser": "^5.21.0",
+    "dotenv": "^16.0.0",
+    "eslint": "^8.14.0",
+    "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "jest": "^27.2.5",
-    "prettier": "^2.3.2",
-    "source-map-support": "^0.5.20",
-    "supertest": "^6.1.3",
-    "ts-jest": "^27.0.3",
-    "ts-loader": "^9.2.3",
-    "ts-node": "^10.0.0",
-    "tsconfig-paths": "^3.10.1",
-    "typescript": "^4.3.5"
+    "jest": "^28.0.2",
+    "lint-staged": "^12.4.1",
+    "prettier": "^2.6.2",
+    "supertest": "^6.2.3",
+    "ts-jest": "^27.1.4",
+    "ts-loader": "^9.2.9",
+    "ts-node": "^10.7.0",
+    "tsconfig-paths": "^3.14.1",
+    "typescript": "^4.6.3"
   },
   "jest": {
     "moduleFileExtensions": [
@@ -57,6 +86,9 @@
       "json",
       "ts"
     ],
+    "moduleNameMapper": {
+      "^src/(.*)$": "<rootDir>/$1"
+    },
     "rootDir": "src",
     "testRegex": ".*\\.spec\\.ts$",
     "transform": {
@@ -67,5 +99,11 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "prettier --write",
+      "eslint --fix"
+    ]
   }
 }

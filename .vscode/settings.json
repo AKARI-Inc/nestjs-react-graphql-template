@@ -15,5 +15,5 @@
     "typescript",
     "typescriptreact"
   ],
-  "eslint.workingDirectories": ["front"]
+  "eslint.workingDirectories": ["back", "front"]
 }

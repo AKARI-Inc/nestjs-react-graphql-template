@@ -1,3 +1,5 @@
 #!/bin/sh
 cd front
 npm run pre-commit
+cd ../back
+npm run pre-commit
