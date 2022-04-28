@@ -1,8 +1,10 @@
 import React from 'react'
 import logo from './logo.svg'
 import './App.css'
+import { useAppQuery } from './generated/graphql'
 
 function App(): JSX.Element {
+  const { data } = useAppQuery()
   return (
     <div className="App">
       <header className="App-header">
@@ -18,6 +20,9 @@ function App(): JSX.Element {
         >
           Learn React
         </a>
+        <p>
+          {data?.users.map((user) => `${user.familyName} ${user.givenName}`).join(', ')}
+        </p>
       </header>
     </div>
   )

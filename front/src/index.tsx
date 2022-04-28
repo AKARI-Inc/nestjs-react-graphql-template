@@ -3,11 +3,21 @@ import ReactDOM from 'react-dom/client'
 import './index.css'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
+import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache } from '@apollo/client'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
+
+const client = new ApolloClient({
+  link: createHttpLink({
+    uri: `${process.env.REACT_APP_BACKEND_HOST}/graphql`
+  }),
+  cache: new InMemoryCache(),
+})
 root.render(
   <React.StrictMode>
+    <ApolloProvider client={client}>
     <App />
+    </ApolloProvider>
   </React.StrictMode>,
 )
 
