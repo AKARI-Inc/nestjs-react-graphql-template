@@ -8,6 +8,7 @@ module.exports = {
   extends: [
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
+    'eslint-config-prettier',
   ],
   root: true,
   env: {
@@ -16,8 +17,8 @@ module.exports = {
   },
   ignorePatterns: ['.eslintrc.js', 'src/migrations/*.ts'],
   rules: {
-    quotes: ['error', 'single', {'avoidEscape': true }],
-    semi: ['error', 'never'],
+    // quotes: ['error', 'single', {'avoidEscape': true }],
+    // semi: ['error', 'never'],
     'arrow-parens': 'error',
     'arrow-spacing': 'error',
     'generator-star-spacing': 'error',
