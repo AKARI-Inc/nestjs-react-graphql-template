@@ -1,0 +1,17 @@
+version: "3.7"
+services:
+
+  front:
+    build:
+      context: ./front
+      target: development
+    volumes:
+      - ./front:/front
+      - npm-cache:/front/node_modules
+    ports:
+      - "3000:3000"
+    working_dir: /front
+    command: sh -c "npm install && mkdir -p node_modules/.cache && chmod -R 777 node_modules/.cache && npm start"
+
+volumes:
+  npm-cache:
