@@ -8,6 +8,7 @@
 
 ```bash
 git config --local core.hooksPath .githooks
+cp .env.example .env # .env ファイルのコピー (Git管理しない情報を書いておく)
 ```
 
 ## Set up with local node
@@ -44,7 +45,7 @@ npm i -D fuga
 [Definitely Typed](https://github.com/DefinitelyTyped/DefinitelyTyped) の TypeScrpt 型定義ファイルはこちらでインストールすること。
 
 
-## Set up with Docker (Front のみならそこまでいらない)
+## Set up with Docker (これでDBも起動する)
 
 ```bash
 docker-compose build
@@ -56,4 +57,4 @@ docker-compose build
 docker-compose up
 ```
 
-このあと http://localhost:3000 に接続すると、front に接続できます。
+このあと http://localhost に接続すると、front に接続できます。

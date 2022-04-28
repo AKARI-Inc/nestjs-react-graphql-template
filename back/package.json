@@ -46,7 +46,7 @@
     "class-validator": "^0.13.2",
     "graphql": "^16.4.0",
     "graphql-tools": "^8.2.8",
-    "graphql-upload": "^13.0.0",
+    "pg": "^8.7.3",
     "pluralize": "^8.0.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",

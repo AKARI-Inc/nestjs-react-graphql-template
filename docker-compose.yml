@@ -1,17 +1,53 @@
 version: "3.7"
 services:
 
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "8080:8080"
+
+  back:
+    build:
+      context: ./back
+    working_dir: /back
+    tty: true
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./back:/back
+      - ./gql-schema:/gql-schema
+      - ./.env:/back/.env
+    depends_on:
+      - db
+    command: sh -c "npm install && npm run start:debug"
+
+  db:
+    platform: "linux/amd64"
+    image:
+      postgres:14.1
+    environment:
+      POSTGRES_DB: main_db
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: dev_sample
+      POSTGRES_ROOT_PASSWORD: dev_sample
+      POSTGRES_INITDB_ARGS: "--encoding=utf8 --locale=en_US.utf8"
+      TZ: "Asia/Tokyo"
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - ./db/data:/var/lib/postgresql/data
+      - ./db/sql:/docker-entrypoint-initdb.d
+    ports:
+      - "5432:5432"
   front:
     build:
       context: ./front
       target: development
     volumes:
       - ./front:/front
-      - npm-cache:/front/node_modules
+      - ./.env:/front/.env
+      - ./gql-schema:/gql-schema
     ports:
-      - "3000:3000"
+      - "80:3000"
     working_dir: /front
     command: sh -c "npm install && mkdir -p node_modules/.cache && chmod -R 777 node_modules/.cache && npm start"
-
-volumes:
-  npm-cache:
