@@ -18,9 +18,10 @@ VSCode での快適な開発のためにも Docker を使う方もこちらの�
 
 
 ```bash
-cd front
+cd front # back でも同様
 npm i # i stands for install
-npm start
+npm start # front
+npm run start # back
 ```
 
 このあと http://localhost:3000 に接続すると、front に接続できます。
