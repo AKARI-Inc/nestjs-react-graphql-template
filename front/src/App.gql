@@ -1,0 +1,9 @@
+query App {
+  users {
+    id
+    familyName
+    givenName
+    givenNameFurigana
+    givenNameFurigana
+  }
+}
