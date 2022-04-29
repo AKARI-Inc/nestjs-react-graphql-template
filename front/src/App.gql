@@ -5,5 +5,9 @@ query App {
     givenName
     givenNameFurigana
     givenNameFurigana
+    books {
+      id
+      title
+    }
   }
 }

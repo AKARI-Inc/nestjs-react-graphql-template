@@ -9,3 +9,8 @@ User:
     givenName: 一郎
     familyNameFurigana: あかり
     givenNameFurigana: いちろう
+
+Book:
+  - id: 978bb9e3-965e-42b1-a818-76b3f7294d75
+    title: 銀河鉄道の夜
+    userId: d0b1c00e-7456-4084-9a12-dc6af67b836a

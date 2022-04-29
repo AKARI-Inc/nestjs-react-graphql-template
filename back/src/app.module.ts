@@ -9,6 +9,7 @@ import { AppService } from './app.service'
 import { TypeOrmConfigService } from './type_orm_config.service'
 import { checkProperty } from './utils'
 import { UsersModule } from './users/users.module'
+import { BooksModule } from './books/books.module'
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -43,6 +44,7 @@ import { UsersModule } from './users/users.module'
       useClass: TypeOrmConfigService,
     }),
     UsersModule,
+    BooksModule,
   ],
   controllers: [AppController],
   providers: [AppService],

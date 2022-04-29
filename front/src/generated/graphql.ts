@@ -19,13 +19,25 @@ export type Scalars = {
   DateTime: any;
 };
 
+export type Book = {
+  __typename?: 'Book';
+  createdAt: Scalars['DateTime'];
+  id: Scalars['ID'];
+  title: Scalars['String'];
+  updatedAt: Scalars['DateTime'];
+  user: User;
+  userId: Scalars['ID'];
+};
+
 export type Query = {
   __typename?: 'Query';
+  books: Array<Book>;
   users: Array<User>;
 };
 
 export type User = {
   __typename?: 'User';
+  books: Array<Book>;
   createdAt: Scalars['DateTime'];
   familyName: Scalars['String'];
   familyNameFurigana: Scalars['String'];
@@ -38,7 +50,7 @@ export type User = {
 export type AppQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type AppQuery = { __typename?: 'Query', users: Array<{ __typename?: 'User', id: string, familyName: string, givenName: string, givenNameFurigana: string }> };
+export type AppQuery = { __typename?: 'Query', users: Array<{ __typename?: 'User', id: string, familyName: string, givenName: string, givenNameFurigana: string, books: Array<{ __typename?: 'Book', id: string, title: string }> }> };
 
 
 export const AppDocument = gql`
@@ -49,6 +61,10 @@ export const AppDocument = gql`
     givenName
     givenNameFurigana
     givenNameFurigana
+    books {
+      id
+      title
+    }
   }
 }
     `;
