@@ -8,7 +8,7 @@ import { AppController } from './app.controller'
 import { AppService } from './app.service'
 import { TypeOrmConfigService } from './type_orm_config.service'
 import { checkProperty } from './utils'
-import { UsersModule } from './users/users.module';
+import { UsersModule } from './users/users.module'
 @Module({
   imports: [
     ConfigModule.forRoot(),

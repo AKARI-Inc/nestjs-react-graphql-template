@@ -9,14 +9,14 @@ const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
 const client = new ApolloClient({
   link: createHttpLink({
-    uri: `${process.env.REACT_APP_BACKEND_HOST}/graphql`
+    uri: `${process.env.REACT_APP_BACKEND_HOST}/graphql`,
   }),
   cache: new InMemoryCache(),
 })
 root.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
-    <App />
+      <App />
     </ApolloProvider>
   </React.StrictMode>,
 )

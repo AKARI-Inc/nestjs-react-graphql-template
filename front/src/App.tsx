@@ -20,9 +20,7 @@ function App(): JSX.Element {
         >
           Learn React
         </a>
-        <p>
-          {data?.users.map((user) => `${user.familyName} ${user.givenName}`).join(', ')}
-        </p>
+        <p>{data?.users.map((user) => `${user.familyName} ${user.givenName}`).join(', ')}</p>
       </header>
     </div>
   )
