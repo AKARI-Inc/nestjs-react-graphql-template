@@ -10,6 +10,7 @@ services:
       - "3000:3000"
     volumes:
       - ./back:/back
+      - ./gql-schema:/gql-schema
       - ./.env:/back/.env
     depends_on:
       - db
